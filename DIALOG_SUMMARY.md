@@ -66,8 +66,47 @@ same running session/namespace.
   the epoch) while validation accuracy is plotted at the epoch's end (a single
   measurement taken after the epoch completes).
 
-## Repository
+## Repository (Problem 1)
 
 - Notebook: `e89_Stokes_Jazmyn_HW03_Prob1.ipynb`
 - Generated scripts, one per prompt above: `scripts/`
 - This summary: `DIALOG_SUMMARY.md`
+
+---
+
+## Part 2 of the dialog — pushing to GitHub, then Problem 2
+
+**Push to GitHub.** Asked to push the dialog to a new, separate GitHub repository
+(`DeepLearning_HW_3_Problem1`). Claude Code's GitHub integration can attach and push
+to an existing repo but cannot create one, so the user created the empty repo on
+github.com; Claude then hit a second snag — the session's GitHub credential didn't
+yet have push access — resolved by the user installing the Claude GitHub App on the
+repo. After that, Claude cloned it, added the Problem 1 notebook, the `scripts/`
+files, this summary, a `README.md`, and a `requirements.txt`, and pushed the
+initial commit.
+
+**Problem 1 revision — call the scripts, don't duplicate them.** Asked to update
+Problem 1 so its cells call the captured scripts rather than embedding the same code
+twice. Every code cell in `e89_Stokes_Jazmyn_HW03_Prob1.ipynb` is now
+`%run scripts/0N_....py` (run from the repo root), preceded by the same per-prompt
+markdown explanation as before — so the notebook and `scripts/` are one copy of the
+code, not two.
+
+**Problem 2 — wrap it all into one notebook.** Asked to merge the nine scripts into
+a single notebook that reads start to finish: one deduplicated Section 0 for every
+import used anywhere (rather than each import appearing where it was first needed),
+followed by nine numbered sections (device/seed/plot defaults; load & split data;
+DataLoaders; model + loss; train/eval function definitions; the 20-epoch training
+run; the required accuracy + loss plots; prediction & visualization; final test
+evaluation), each with its own markdown explanation and no external script
+dependency. Saved as `problem2/e89_Stokes_Jazmyn_HW03_Prob2.ipynb`.
+
+**Execution.** Both notebooks were synced to the user's Mac (Week3 folder) along
+with `verify_prob1.command` / `verify_prob2.command` / `run_both.command` —
+double-clickable scripts that run `jupyter nbconvert --execute` (with
+`allow_errors=True` so every failing cell is surfaced in one pass, not just the
+first) against the user's own Python/conda environment, then export each notebook to
+HTML. Claude could not execute them directly: computer-use is enabled but macOS
+Accessibility/Screen Recording permission for the Claude desktop app was still
+pending, so double-clicking these scripts and reporting back any errors was left to
+the user (or Claude will pick it up once that permission is granted).
